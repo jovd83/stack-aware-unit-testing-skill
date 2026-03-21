@@ -1,0 +1,7 @@
+interface:
+  display_name: "Stack-Aware Unit Testing Skill"
+  short_description: "Inspect repos, route unit-test work, author isolated tests, and report findings"
+  default_prompt: "Use $stack-aware-unit-testing-skill to inspect this repository, reuse the current unit-test framework when present, choose a minimal fallback when absent, write isolated tests, and report verification status plus defects or testability risks."
+
+policy:
+  allow_implicit_invocation: true

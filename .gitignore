@@ -1,0 +1,12 @@
+# Imported local policy overrides are workspace-specific and should not ship by default.
+references/local-testing-policy.md
+
+# Common editor and OS noise
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Local validation artifacts
+artifacts/
+tmp/

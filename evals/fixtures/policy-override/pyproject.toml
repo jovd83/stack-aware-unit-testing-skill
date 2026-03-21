@@ -1,0 +1,4 @@
+[project]
+name = "policy-override-fixture"
+version = "0.1.0"
+description = "Fixture for local testing policy override evaluation"

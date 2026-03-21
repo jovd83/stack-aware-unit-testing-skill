@@ -1,0 +1,212 @@
+{
+  "skill_name": "stack-aware-unit-testing-skill",
+  "evals": [
+    {
+      "id": "existing-jest-routing",
+      "prompt": "Use $stack-aware-unit-testing-skill to inspect evals/fixtures/node-jest and tell me whether you would reuse the current framework or introduce a new one before adding tests.",
+      "expected_output": "A concise response that identifies the JavaScript or TypeScript ecosystem, recognizes the existing Jest-style setup, and explicitly says to reuse the current framework rather than replacing it.",
+      "checks": {
+        "must_contain": [
+          "reuse",
+          "Jest",
+          "existing"
+        ],
+        "must_not_contain": [
+          "replace the framework",
+          "migrate to Vitest"
+        ]
+      },
+      "files": [
+        "evals/fixtures/node-jest/package.json",
+        "evals/fixtures/node-jest/src/sum.ts",
+        "evals/fixtures/node-jest/src/sum.test.ts"
+      ]
+    },
+    {
+      "id": "greenfield-python-default",
+      "prompt": "Use $stack-aware-unit-testing-skill to inspect evals/fixtures/python-greenfield and recommend the default unit-test framework you would introduce for new tests.",
+      "expected_output": "A concise response that identifies the Python ecosystem, notes the absence of existing tests, and recommends pytest as the minimal default fallback with explicit assumptions.",
+      "checks": {
+        "must_contain": [
+          "Python",
+          "pytest",
+          "no existing tests"
+        ],
+        "must_not_contain": [
+          "Playwright",
+          "Cypress"
+        ]
+      },
+      "files": [
+        "evals/fixtures/python-greenfield/pyproject.toml",
+        "evals/fixtures/python-greenfield/app/service.py"
+      ]
+    },
+    {
+      "id": "junit-specialized-handoff",
+      "prompt": "Use $stack-aware-unit-testing-skill to inspect evals/fixtures/java-junit and decide whether to stay in the fallback skill or route to a more specialized one.",
+      "expected_output": "A response that recognizes the JVM plus JUnit 5 context and recommends handing off to junit5-skill after inspection.",
+      "checks": {
+        "must_contain": [
+          "JUnit 5",
+          "junit5-skill"
+        ],
+        "must_not_contain": [
+          "switch to another framework"
+        ]
+      },
+      "files": [
+        "evals/fixtures/java-junit/pom.xml",
+        "evals/fixtures/java-junit/src/main/java/com/example/PriceCalculator.java",
+        "evals/fixtures/java-junit/src/test/java/com/example/PriceCalculatorTest.java"
+      ]
+    },
+    {
+      "id": "defect-reporting-discipline",
+      "prompt": "Use $stack-aware-unit-testing-skill to review a test task where a newly written test exposes a null-handling bug. Tell me how you should report that result.",
+      "expected_output": "A structured answer that separates verification from findings, explains that the failing test exposed a defect, and states that production code should stay untouched unless the user expands scope.",
+      "checks": {
+        "must_contain": [
+          "Verification",
+          "Findings",
+          "failing test",
+          "production code"
+        ]
+      }
+    },
+    {
+      "id": "go-greenfield-default",
+      "prompt": "Use $stack-aware-unit-testing-skill to inspect evals/fixtures/go-greenfield and recommend the unit-test approach for this repository.",
+      "expected_output": "A response that identifies Go, notes the absence of tests, and recommends the standard testing package instead of introducing unnecessary frameworks.",
+      "checks": {
+        "must_contain": [
+          "Go",
+          "standard testing package"
+        ],
+        "must_not_contain": [
+          "pytest",
+          "Jest"
+        ]
+      },
+      "files": [
+        "evals/fixtures/go-greenfield/go.mod",
+        "evals/fixtures/go-greenfield/internal/mathutil/add.go"
+      ]
+    },
+    {
+      "id": "dotnet-existing-tests",
+      "prompt": "Use $stack-aware-unit-testing-skill to inspect evals/fixtures/dotnet-xunit and tell me whether you should reuse the current framework.",
+      "expected_output": "A response that identifies .NET, notices the existing xUnit-style setup, and says to reuse the current framework and project conventions.",
+      "checks": {
+        "must_contain": [
+          ".NET",
+          "reuse",
+          "xUnit"
+        ]
+      },
+      "files": [
+        "evals/fixtures/dotnet-xunit/Calculator.sln",
+        "evals/fixtures/dotnet-xunit/tests/Calculator.Tests/Calculator.Tests.csproj",
+        "evals/fixtures/dotnet-xunit/tests/Calculator.Tests/CalculatorTests.cs"
+      ]
+    },
+    {
+      "id": "rust-existing-tests",
+      "prompt": "Use $stack-aware-unit-testing-skill to inspect evals/fixtures/rust-cargo and summarize the detected test context.",
+      "expected_output": "A response that identifies Rust or Cargo-based testing context and avoids introducing unrelated frameworks.",
+      "checks": {
+        "must_contain": [
+          "Rust"
+        ],
+        "must_not_contain": [
+          "JUnit",
+          "RSpec"
+        ]
+      },
+      "files": [
+        "evals/fixtures/rust-cargo/Cargo.toml",
+        "evals/fixtures/rust-cargo/src/lib.rs"
+      ]
+    },
+    {
+      "id": "ruby-existing-tests",
+      "prompt": "Use $stack-aware-unit-testing-skill to inspect evals/fixtures/ruby-rspec and recommend whether to keep the current test approach.",
+      "expected_output": "A response that identifies Ruby plus RSpec and recommends reusing that setup.",
+      "checks": {
+        "must_contain": [
+          "Ruby",
+          "RSpec",
+          "reuse"
+        ]
+      },
+      "files": [
+        "evals/fixtures/ruby-rspec/Gemfile",
+        "evals/fixtures/ruby-rspec/lib/calculator.rb",
+        "evals/fixtures/ruby-rspec/spec/calculator_spec.rb"
+      ]
+    },
+    {
+      "id": "dotnet-mstest-existing-tests",
+      "prompt": "Use $stack-aware-unit-testing-skill to inspect evals/fixtures/dotnet-mstest and tell me whether the repository already signals a unit-test framework to reuse.",
+      "expected_output": "A response that identifies .NET, recognizes MSTest from the project file, and recommends reusing that framework instead of introducing another one.",
+      "checks": {
+        "must_contain": [
+          ".NET",
+          "MSTest",
+          "reuse"
+        ],
+        "must_not_contain": [
+          "switch to xUnit",
+          "switch to NUnit"
+        ]
+      },
+      "files": [
+        "evals/fixtures/dotnet-mstest/Calculator.sln",
+        "evals/fixtures/dotnet-mstest/tests/Calculator.Tests/Calculator.Tests.csproj",
+        "evals/fixtures/dotnet-mstest/tests/Calculator.Tests/CalculatorTests.cs"
+      ]
+    },
+    {
+      "id": "dotnet-nunit-existing-tests",
+      "prompt": "Use $stack-aware-unit-testing-skill to inspect evals/fixtures/dotnet-nunit and summarize whether a current test framework is already established.",
+      "expected_output": "A response that identifies .NET, recognizes NUnit, and recommends staying with the current conventions.",
+      "checks": {
+        "must_contain": [
+          ".NET",
+          "NUnit",
+          "reuse"
+        ],
+        "must_not_contain": [
+          "switch to xUnit",
+          "switch to MSTest"
+        ]
+      },
+      "files": [
+        "evals/fixtures/dotnet-nunit/Calculator.sln",
+        "evals/fixtures/dotnet-nunit/tests/Calculator.Tests/Calculator.Tests.csproj",
+        "evals/fixtures/dotnet-nunit/tests/Calculator.Tests/CalculatorTests.cs"
+      ]
+    },
+    {
+      "id": "policy-override-pytest",
+      "prompt": "Use $stack-aware-unit-testing-skill to inspect evals/fixtures/policy-override. Assume the team imports evals/fixtures/policy-override/testing-policy.md as the local testing policy. Recommend the unit-test approach and explain how the policy affects the decision.",
+      "expected_output": "A response that identifies Python, notes there are no existing tests, recommends pytest, and explains that the imported local policy narrows the allowed choice rather than replacing repository facts.",
+      "checks": {
+        "must_contain": [
+          "Python",
+          "pytest",
+          "local policy"
+        ],
+        "must_not_contain": [
+          "unittest2",
+          "ignore the policy"
+        ]
+      },
+      "files": [
+        "evals/fixtures/policy-override/pyproject.toml",
+        "evals/fixtures/policy-override/app/service.py",
+        "evals/fixtures/policy-override/testing-policy.md"
+      ]
+    }
+  ]
+}

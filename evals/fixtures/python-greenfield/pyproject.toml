@@ -1,0 +1,4 @@
+[project]
+name = "python-greenfield-fixture"
+version = "0.1.0"
+description = "Fixture without an existing test stack"
