@@ -103,6 +103,15 @@ For smaller tasks, compress the same information into a shorter prose response, 
 - Leave production code untouched unless the user explicitly expands the scope.
 - Report the impact and exact location using [references/reporting-contract.md](references/reporting-contract.md).
 
+## Gotchas
+
+- **Environment & Shell**: The provided scripts (e.g., `detect-test-context.ps1`) are **PowerShell**. You must use `pwsh` on Linux or macOS environments.
+- **Implicit Production Changes**: Changing a method from `private` to `public` or adding a new `export` just to enable testing **is a production code change**. Always call this out as a "testability tradeoff" rather than doing it silently.
+- **`devDependencies` vs `dependencies`**: When a task requires adding a new framework, ensure it is strictly added as a development dependency (e.g., `npm install --save-dev` or `pip install --dev`) to avoid bloating the production artifact.
+- **Leaky Mocks**: Mocking global objects (like `console`, `Date`, or `process.env`) can cause test flakiness if the mocks aren't reset. Always prefer framework-native mocking utilities that handle cleanup automatically.
+- **CI/Local Divergence**: Tests may pass locally but fail in CI due to missing environment variables or filesystem permissions. Before declaring "Verification" successful, check for any `setup.sh`, `.env.example`, or CI YAML files that define the test environment.
+- **Detection Ambiguity**: In monorepos with mixed languages (e.g., a Python backend and Node frontend), `detect-test-context.ps1` might return multiple frameworks. Always verify you are looking at the manifest (`package.json`, `pyproject.toml`) closest to the target file.
+
 ## Memory Model
 
 This skill does not maintain its own persistent memory layer.
