@@ -36,7 +36,7 @@ if ($Help) {
 
 function Get-NormalizedPath {
     param([string]$Path)
-    return (Resolve-Path -LiteralPath $Path).Path
+    return [System.IO.Path]::GetFullPath((Resolve-Path -LiteralPath $Path).Path)
 }
 
 function Get-RelativePath {
@@ -45,9 +45,22 @@ function Get-RelativePath {
         [string]$FullPath
     )
 
-    $baseUri = [System.Uri]((Get-NormalizedPath $BasePath).TrimEnd('\') + '\')
-    $fullUri = [System.Uri](Get-NormalizedPath $FullPath)
-    return [System.Uri]::UnescapeDataString($baseUri.MakeRelativeUri($fullUri).ToString()).Replace('/', '\')
+    $normalizedBasePath = Get-NormalizedPath $BasePath
+    $normalizedFullPath = Get-NormalizedPath $FullPath
+    $trimChars = [char[]]@([System.IO.Path]::DirectorySeparatorChar, [System.IO.Path]::AltDirectorySeparatorChar)
+    $baseWithSeparator = $normalizedBasePath.TrimEnd($trimChars) + [System.IO.Path]::DirectorySeparatorChar
+
+    if ($normalizedFullPath.StartsWith($baseWithSeparator, [System.StringComparison]::OrdinalIgnoreCase)) {
+        $relativePath = $normalizedFullPath.Substring($baseWithSeparator.Length)
+    } elseif ($normalizedFullPath.Equals($normalizedBasePath, [System.StringComparison]::OrdinalIgnoreCase)) {
+        $relativePath = "."
+    } else {
+        $baseUri = New-Object System.Uri($baseWithSeparator)
+        $fullUri = New-Object System.Uri($normalizedFullPath)
+        $relativePath = [System.Uri]::UnescapeDataString($baseUri.MakeRelativeUri($fullUri).ToString())
+    }
+
+    return $relativePath.Replace([System.IO.Path]::AltDirectorySeparatorChar, '\').Replace([System.IO.Path]::DirectorySeparatorChar, '\')
 }
 
 function Get-ChildFilesSafe {
