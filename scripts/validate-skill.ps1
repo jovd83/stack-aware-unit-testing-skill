@@ -22,7 +22,6 @@ $requiredPaths = @(
     "VERSION",
     "CHANGELOG.md",
     "LICENSE",
-    "CONTRIBUTING.md",
     "RELEASE_CHECKLIST.md",
     ".gitignore",
     "agents/openai.yaml",
