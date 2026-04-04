@@ -1,5 +1,7 @@
 # Stack-Aware Unit Testing Skill
 
+[![license](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+
 `stack-aware-unit-testing-skill` is a stack-aware Agent Skill for inspecting repositories, choosing the right unit-test path, writing isolated tests, and reporting quality risks without silently rewriting production code.
 
 [![Version](https://img.shields.io/badge/version-2.2.0-blue.svg)](VERSION)
