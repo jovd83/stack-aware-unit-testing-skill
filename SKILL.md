@@ -111,6 +111,9 @@ For smaller tasks, compress the same information into a shorter prose response, 
 - **Leaky Mocks**: Mocking global objects (like `console`, `Date`, or `process.env`) can cause test flakiness if the mocks aren't reset. Always prefer framework-native mocking utilities that handle cleanup automatically.
 - **CI/Local Divergence**: Tests may pass locally but fail in CI due to missing environment variables or filesystem permissions. Before declaring "Verification" successful, check for any `setup.sh`, `.env.example`, or CI YAML files that define the test environment.
 - **Detection Ambiguity**: In monorepos with mixed languages (e.g., a Python backend and Node frontend), `detect-test-context.ps1` might return multiple frameworks. Always verify you are looking at the manifest (`package.json`, `pyproject.toml`) closest to the target file.
+- **The Reality Trap (Rubber-Stamping)**: When generating tests for existing code, do not assume the current output is correct. Always cross-reference the logic with the problem description or requirements. A test that "passes" against a bug is itself a defect.
+- **Hallucinated Infrastructure**: AI might invent test helpers, assertions (e.g., `expect(f).toExist()`), or runner flags that don't exist in your specific version of Jest/Pytest/Mocha. Always verify the API against the actual installed version or official documentation.
+- **Integration Drift**: Without strict mocking of I/O, unit tests can accidentally become slow integration tests. If a test hits a database, network, or filesystem, it violates the isolation principle and should be flagged as a "testability risk" or moved to a separate suite.
 
 ## Memory Model
 
