@@ -1,6 +1,17 @@
 ---
 name: stack-aware-unit-testing-skill
 description: Stack-aware unit and component test planning, authoring, and review for existing repositories. Use when Codex needs to inspect a codebase, detect the current test framework, decide whether to reuse or introduce a unit-test stack, design coverage for functions, classes, or modules, write isolated tests without silently changing production code, or report unit-test gaps, defects, and testability risks.
+metadata:
+  author: jovd83
+  version: "1.0.0"
+  dispatcher-category: testing
+  dispatcher-capabilities: unit-testing, component-testing, test-stack-detection, unit-test-review
+  dispatcher-accepted-intents: plan_unit_test_work, implement_unit_tests, review_unit_test_coverage
+  dispatcher-input-artifacts: repo_context, target_code, requirements, existing_test_suite, defect_report
+  dispatcher-output-artifacts: unit_test_plan, unit_tests, coverage_findings, testability_report, routing_request
+  dispatcher-stack-tags: unit-testing, component-testing, framework-detection
+  dispatcher-risk: medium
+  dispatcher-writes-files: true
 ---
 
 # Stack-Aware Unit Testing Skill
@@ -23,6 +34,15 @@ Use this skill as the default entrypoint for unit and component testing work whe
 - Do not add new dependencies casually. If a new test dependency is required, keep it minimal and state the reason.
 - Do not claim coverage quality from line coverage alone. Prefer behavior, branches, edge cases, and failure modes.
 
+## Dispatcher Integration
+
+Use `skill-dispatcher` as the primary integration layer when this skill needs to hand off to a stack-specific testing skill.
+
+- Inspect the repository first, then dispatch by intent and detected stack instead of hardcoding sibling skill names.
+- Prefer the repository's existing unit-test framework over introducing a new one.
+- Treat named framework skills as examples and compatibility fallbacks, not as the primary routing contract.
+- Keep shared memory limited to stable cross-project policy supplied externally, never task-local test notes.
+
 ## Fast Start
 
 1. Run `scripts/detect-test-context.ps1 -Root . -Format json`.
@@ -42,7 +62,7 @@ If the repository already has unit or component tests, you must stay within that
 
 ### 2. Prefer specialized skills when they fit exactly
 
-If the detected stack maps cleanly to a dedicated skill that is available in the environment, pivot to it after inspection.
+If the detected stack maps cleanly to a dedicated skill that is available in the environment, use `skill-dispatcher` to pivot to it after inspection.
 
 Examples:
 - Java plus JUnit 5: prefer `junit5-skill`
