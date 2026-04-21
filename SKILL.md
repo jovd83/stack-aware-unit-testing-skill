@@ -2,7 +2,7 @@
 name: stack-aware-unit-testing-skill
 description: Stack-aware unit and component test planning, authoring, and review for existing repositories. Use when Codex needs to inspect a codebase, detect the current test framework, decide whether to reuse or introduce a unit-test stack, design coverage for functions, classes, or modules, write isolated tests without silently changing production code, or report unit-test gaps, defects, and testability risks.
 metadata:
-  dispatcher-layer: execution
+  dispatcher-layer: information
   dispatcher-lifecycle: active
   author: jovd83
   version: "1.1.0"
