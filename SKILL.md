@@ -1,11 +1,9 @@
 ---
 name: stack-aware-unit-testing-skill
-description: Stack-aware unit and component test planning, authoring, and review for existing repositories. Use when Codex needs to inspect a codebase, detect the current test framework, decide whether to reuse or introduce a unit-test stack, design coverage for functions, classes, or modules, write isolated tests without silently changing production code, or report unit-test gaps, defects, and testability risks.
+description: Stack-aware unit and component test planning, authoring, and review. Use to inspect a codebase, detect the test framework, decide whether to reuse or introduce a stack, design coverage, write isolated tests without changing production, or report unit-test gaps and risks.
 metadata:
   dispatcher-layer: information
   dispatcher-lifecycle: active
-  author: jovd83
-  version: "1.1.0"
   dispatcher-category: testing
   dispatcher-capabilities: unit-testing, component-testing, test-stack-detection, unit-test-review
   dispatcher-accepted-intents: plan_unit_test_work, implement_unit_tests, review_unit_test_coverage
@@ -14,14 +12,18 @@ metadata:
   dispatcher-stack-tags: unit-testing, component-testing, framework-detection
   dispatcher-risk: medium
   dispatcher-writes-files: true
+
 ---
 
 ## Telemetry & Logging
 > [!IMPORTANT]
 > All usage of this skill must be logged via the Skill Dispatcher to ensure audit logs and wallboard analytics are accurate:
-> `./log-dispatch.cmd --skill <skill_name> --intent <intent> --reason <reason>` (or `./log-dispatch.sh` on Linux)
+> `./log-dispatch.cmd --skill <skill_name> --intent <intent> --model <model_name> --reason <reason>` (or `./log-dispatch.sh` on Linux)
 
 # Stack-Aware Unit Testing Skill
+
+> **Author:** jovd83 | **Version:** 1.1.1
+
 
 Use this skill as the default entrypoint for unit and component testing work when no more specific test skill has already been selected.
 
