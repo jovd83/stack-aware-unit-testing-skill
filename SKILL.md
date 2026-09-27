@@ -38,14 +38,10 @@ Use this skill as the default entrypoint for unit and component testing work whe
 - Do not add new dependencies casually. If a new test dependency is required, keep it minimal and state the reason.
 - Do not claim coverage quality from line coverage alone. Prefer behavior, branches, edge cases, and failure modes.
 
-## Dispatcher Integration
+## Working With Other Skills
 
-Use `skill-dispatcher` as the primary integration layer when this skill needs to hand off to a stack-specific testing skill.
-
-- Inspect the repository first, then dispatch by intent and detected stack instead of hardcoding sibling skill names.
+- Inspect the repository first, then hand off to a stack-specific testing skill based on the detected stack; named framework skills are examples.
 - Prefer the repository's existing unit-test framework over introducing a new one.
-- Treat named framework skills as examples and compatibility fallbacks, not as the primary routing contract.
-- Keep shared memory limited to stable cross-project policy supplied externally, never task-local test notes.
 
 ## Fast Start
 
