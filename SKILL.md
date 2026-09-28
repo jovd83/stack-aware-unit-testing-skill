@@ -141,7 +141,7 @@ This skill does not maintain its own persistent memory layer.
 
 - Treat repository inspection notes and test plans as runtime memory for the current task.
 - Store durable, project-specific conventions in repository files, not hidden memory.
-- If cross-agent memory is needed for broader reuse, integrate an external shared-memory skill instead of embedding that responsibility here.
+- If cross-agent memory is needed for broader reuse, use the agent's own memory (for example CLAUDE.md or AGENTS.md) instead of embedding that responsibility here.
 
 ## Resource Map
 
